@@ -41,6 +41,7 @@ public class ViewCast : MonoBehaviour
             if(hit.collider.tag == "Player")
             {
                     Debug.Log("Player");
+                    GameScore.Instance.lost = true;
             }
             }
         }
