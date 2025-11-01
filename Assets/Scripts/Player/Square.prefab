@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3234008430905465649}
   - component: {fileID: 3593398525283808988}
   - component: {fileID: 5720882627750966845}
+  - component: {fileID: 2637289127213834838}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -76,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ea2e5eec4cdfcc4fb4e8748d295d15d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55efe03e602840e49b4bdc6403dd6c2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 66.666664, y: 26.666666}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,12 +101,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBeforeDisappear: 2
-  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightColor: {r: 0.7169812, g: 0.17180489, b: 0.17180489, a: 1}
   hitboxSize: {x: 1.5, y: 1.5}
   progressBar: {fileID: 2483722817683995934}
   barBackground: {fileID: 6119397504322658739}
-  staticSprites: []
-  animator: {fileID: 0}
+  staticSprites:
+  - {fileID: 21300000, guid: 55efe03e602840e49b4bdc6403dd6c2a, type: 3}
+  - {fileID: 21300000, guid: c02902fbd954b6c46b8430d3b2706042, type: 3}
+  - {fileID: 21300000, guid: 655c87eef4e2adc4f8f2abee61ec8e7f, type: 3}
+  - {fileID: 21300000, guid: 0e4f48a6414f2784fb961589b721391c, type: 3}
+  - {fileID: 21300000, guid: 5be4712daf800f24b992226f49633d73, type: 3}
+  - {fileID: 21300000, guid: 1d0c2214c7c5cbb4db0cd2871d439e85, type: 3}
+  animator: {fileID: 2637289127213834838}
 --- !u!61 &5720882627750966845
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,19 +126,39 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -8.764605, y: 0}
+  m_Offset: {x: -8.764603, y: 1.292572}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 100, y: 40}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 66.666664, y: 26.666666}
+    newSize: {x: 66.666664, y: 26.666666}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 80.98222, y: 42.12248}
+  m_Size: {x: 80.98222, y: 44.70762}
   m_EdgeRadius: 0
+--- !u!95 &2637289127213834838
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533640478350123369}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ff9985efedbd164ab862f093cbe47eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6119397504322658739
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,8 +268,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7316623353338822872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 4.445958, y: 0.89108855, z: 1}
+  m_LocalPosition: {x: -5.7, y: 16, z: 0}
+  m_LocalScale: {x: 111.84207, y: 22.416134, z: 25.1559}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4689067044711002968}

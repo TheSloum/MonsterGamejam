@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+
 using UnityEngine;
 
 public class DisappearOnInteract2D : MonoBehaviour
@@ -13,8 +14,8 @@ public class DisappearOnInteract2D : MonoBehaviour
     public GameObject barBackground;
 
     [Header("Apparence")]
-    public Sprite[] staticSprites; // cadavre_1 à cadavre_5
-    public Animator animator;       // Animator pour la 6e option
+    public Sprite[] staticSprites; // 6 sprites cadavre_1 à cadavre_6
+    public Animator animator;      // Animator pour le cadavre_0 animé
 
     private SpriteRenderer sr;
     private Color originalColor;
@@ -29,7 +30,7 @@ public class DisappearOnInteract2D : MonoBehaviour
         if (sr != null)
             originalColor = sr.color;
 
-        // Collider
+        // Collider setup
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
         if (collider != null)
         {
@@ -37,7 +38,7 @@ public class DisappearOnInteract2D : MonoBehaviour
             collider.isTrigger = true;
         }
 
-        // Barre
+        // Progress bar setup
         if (progressBar != null)
         {
             initialScale = progressBar.localScale;
@@ -46,22 +47,28 @@ public class DisappearOnInteract2D : MonoBehaviour
         if (barBackground != null)
             barBackground.SetActive(false);
 
-        // Référence PlayerMovement
+        // Player ref
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
-        // Apparence aléatoire
-        int index = Random.Range(0, 6);
-        if (index < 5)
+
+
+        int index = Random.Range(0, 7); // 0–6 inclus
+
+        if (index == 0)
         {
-            sr.sprite = staticSprites[index];
             if (animator != null)
-                animator.enabled = false; // désactive l'anim si c'était actif
+                animator.enabled = true;
         }
         else
         {
+            sr.sprite = staticSprites[index - 1];
             if (animator != null)
-                animator.enabled = true;  // lance l'animation 6e option
+                animator.enabled = false;
         }
+
+
+
+
     }
 
     void Update()
@@ -115,7 +122,7 @@ public class DisappearOnInteract2D : MonoBehaviour
             yield return null;
         }
 
-        GameManager.Instance.AddScore(10);
+        GameManager.Instance.AddScore(1);
         Destroy(gameObject);
     }
 
@@ -138,8 +145,9 @@ public class DisappearOnInteract2D : MonoBehaviour
         {
             playerIsNear = true;
             if (sr != null)
-                sr.color = highlightColor;
+            sr.color = highlightColor;
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
