@@ -311,8 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 160
-  moveSpeed: 0.006
-  maxSpeed: 0.001
+  moveSpeed: 0.2
+  maxSpeed: 0.2
   levelGen: {fileID: 0}
   canMove: 1
   movementThreshold: 0.1
