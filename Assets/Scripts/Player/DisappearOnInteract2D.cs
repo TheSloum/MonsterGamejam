@@ -7,7 +7,6 @@ public class DisappearOnInteract2D : MonoBehaviour
     [Header("Paramètres du carré")]
     public float delayBeforeDisappear = 2f;
     public Color highlightColor = Color.yellow;
-    public Vector2 hitboxSize = new Vector2(1.5f, 1.5f);
 
     [Header("Barre de progression")]
     public Transform progressBar;
@@ -34,7 +33,6 @@ public class DisappearOnInteract2D : MonoBehaviour
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
         if (collider != null)
         {
-            collider.size = hitboxSize;
             collider.isTrigger = true;
         }
 

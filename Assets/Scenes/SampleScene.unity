@@ -296,7 +296,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 768260985124337047, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
       propertyPath: m_Radius
-      value: 25.497074
+      value: 17.637724
       objectReference: {fileID: 0}
     - target: {fileID: 768260985124337047, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
       propertyPath: m_Offset.x
@@ -304,7 +304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 768260985124337047, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
       propertyPath: m_Offset.y
-      value: -6.9699364
+      value: -5.54957
       objectReference: {fileID: 0}
     - target: {fileID: 768260985124337048, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
       propertyPath: levelGen
