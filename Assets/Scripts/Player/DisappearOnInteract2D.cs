@@ -12,8 +12,12 @@ public class DisappearOnInteract2D : MonoBehaviour
     public int scoreValue = 1;
 
     [Header("Barre de progression")]
-    public Transform progressBar;    // La barre verte
-    public GameObject barBackground; // Le fond noir
+    public Transform progressBar;
+    public GameObject barBackground;
+
+    [Header("Apparence")]
+    public Sprite[] possibleSprites = new Sprite[6]; // Tableau de 6 sprites à assigner dans l’inspector
+
 
     private SpriteRenderer sr;
     private Color originalColor;
@@ -39,11 +43,24 @@ public class DisappearOnInteract2D : MonoBehaviour
         if (progressBar != null)
         {
             initialScale = progressBar.localScale;
-            progressBar.gameObject.SetActive(false); // Cacher la barre au départ
+            progressBar.gameObject.SetActive(false);
         }
 
         if (barBackground != null)
-            barBackground.SetActive(false); // Cacher le fond au départ
+            barBackground.SetActive(false);
+
+        sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            originalColor = sr.color;
+
+            // Choix aléatoire d’un sprite dans le tableau
+            if (possibleSprites != null && possibleSprites.Length > 0)
+            {
+                int index = Random.Range(0, possibleSprites.Length); 
+                sr.sprite = possibleSprites[index];
+            }
+        }
     }
 
 
