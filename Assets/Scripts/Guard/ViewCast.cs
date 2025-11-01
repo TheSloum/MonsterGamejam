@@ -10,9 +10,19 @@ public class ViewCast : MonoBehaviour
 
     [Header("Detection Settings")]
     public LayerMask detectionMask;
+    private float timer = 0f;
+private bool coold = true;
 
     void Update()
     {
+         if (coold)
+    {
+        timer += Time.deltaTime;
+        if (timer >= 0.5f)
+        {
+            coold = false;
+        }
+    }
         DrawVisionCone();
     }
 

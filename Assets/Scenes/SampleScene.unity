@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 6609531841292764132, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
+      propertyPath: moveSpeed
+      value: 2800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
 --- !u!1 &53163705 stripped
@@ -7575,6 +7579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   day: 1
+  lost: 0
+  isPaused: 0
 --- !u!4 &1768263726
 Transform:
   m_ObjectHideFlags: 0
