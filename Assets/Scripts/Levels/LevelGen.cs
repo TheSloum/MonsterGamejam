@@ -23,7 +23,7 @@ public GameObject player;
     void Start()
 
     {
-    
+    dayscore = GameObject.Find("ScoreManager");
     }
     public void LevelStart()
     {
