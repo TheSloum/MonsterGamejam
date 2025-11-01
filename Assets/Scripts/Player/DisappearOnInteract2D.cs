@@ -1,31 +1,34 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class DisappearOnInteract2D : MonoBehaviour
 {
-    [Header("Paramètres du carré")]
-    public float delayBeforeDisappear = 2f;       // Durée avant disparition
-    public Color highlightColor = Color.yellow;  // Couleur quand le joueur est proche
+    [Header("ParamÃ¨tres du carrÃ©")]
+    public float delayBeforeDisappear = 2f;
+    public Color highlightColor = Color.yellow;
     public Vector2 hitboxSize = new Vector2(1.5f, 1.5f);
+    public int scoreValue = 1;
 
     [Header("Barre de progression")]
     public Transform progressBar;    // La barre verte
-    public GameObject barBackground; // Fond noir derrière la barre
+    public GameObject barBackground; // Le fond noir
 
     private SpriteRenderer sr;
     private Color originalColor;
     private Vector3 initialScale;
+
     private bool playerIsNear = false;
-    private bool isDisappearing = false;
+    private bool isCollecting = false;
+    private Coroutine collectionCoroutine;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
-        // SpriteRenderer du carré
         sr = GetComponent<SpriteRenderer>();
-        if (sr != null)
-            originalColor = sr.color;
+        if (sr != null) originalColor = sr.color;
 
-        // Ajuster la taille du collider
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
         if (collider != null)
         {
@@ -33,44 +36,59 @@ public class DisappearOnInteract2D : MonoBehaviour
             collider.isTrigger = true;
         }
 
-        // Initialiser la barre verte
         if (progressBar != null)
         {
             initialScale = progressBar.localScale;
-            progressBar.gameObject.SetActive(false); // cachée au départ
+            progressBar.gameObject.SetActive(false); // Cacher la barre au dÃ©part
         }
 
-        // Cacher le fond noir
         if (barBackground != null)
-            barBackground.SetActive(false);
+            barBackground.SetActive(false); // Cacher le fond au dÃ©part
     }
+
 
     void Update()
     {
-        // Lancer la destruction si le joueur est proche et appuie sur Espace
-        if (playerIsNear && Input.GetKeyDown(KeyCode.Space) && !isDisappearing)
+        if (!playerIsNear || playerMovement == null)
         {
-            StartCoroutine(DisappearAfterDelay());
+            CancelCollection();
+            return;
+        }
+
+        // Commence la collecte uniquement si Espace est maintenu
+        if (Input.GetKey(KeyCode.Space))
+        {
+            // Annule si le joueur bouge
+            if (playerMovement.IsMoving())
+            {
+                CancelCollection();
+            }
+            else if (!isCollecting)
+            {
+                collectionCoroutine = StartCoroutine(FillBar());
+            }
+        }
+        else
+        {
+            CancelCollection();
         }
     }
 
-    private IEnumerator DisappearAfterDelay()
+    private IEnumerator FillBar()
     {
-        isDisappearing = true;
-        float elapsed = 0f;
+        isCollecting = true;
 
-        // Activer le fond noir
         if (barBackground != null)
             barBackground.SetActive(true);
 
-        // Activer et réinitialiser la barre verte
         if (progressBar != null)
         {
             progressBar.gameObject.SetActive(true);
             progressBar.localScale = new Vector3(0f, initialScale.y, initialScale.z);
         }
 
-        // Remplir la barre progressivement
+
+        float elapsed = 0f;
         while (elapsed < delayBeforeDisappear)
         {
             elapsed += Time.deltaTime;
@@ -79,11 +97,43 @@ public class DisappearOnInteract2D : MonoBehaviour
             if (progressBar != null)
                 progressBar.localScale = new Vector3(progress * initialScale.x, initialScale.y, initialScale.z);
 
+            // Annule si le joueur bouge ou relÃ¢che Espace
+            if (!Input.GetKey(KeyCode.Space) || playerMovement.IsMoving())
+            {
+                CancelCollection();
+                yield break;
+            }
+
             yield return null;
         }
 
-        // Détruire le carré
+        // Ajouter le score
+        if (GameManager.Instance != null)
+            GameManager.Instance.AddScore(scoreValue);
+
         Destroy(gameObject);
+        isCollecting = false;
+    }
+
+    private void CancelCollection()
+    {
+        if (!isCollecting) return;
+
+        // RÃ©initialise la barre
+        if (progressBar != null)
+            progressBar.localScale = new Vector3(0f, initialScale.y, initialScale.z);
+
+        // On garde le fond visible si tu veux
+        if (barBackground != null)
+            barBackground.SetActive(true);
+
+        if (collectionCoroutine != null)
+        {
+            StopCoroutine(collectionCoroutine);
+            collectionCoroutine = null;
+        }
+
+        isCollecting = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -91,8 +141,8 @@ public class DisappearOnInteract2D : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsNear = true;
-            if (sr != null)
-                sr.color = highlightColor; // Changer couleur quand proche
+            if (sr != null) sr.color = highlightColor;
+            playerMovement = collision.GetComponent<PlayerMovement>();
         }
     }
 
@@ -101,18 +151,8 @@ public class DisappearOnInteract2D : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsNear = false;
-            if (sr != null)
-                sr.color = originalColor;
-
-            // Si la barre n’a pas encore commencé, cacher barre et fond
-            if (!isDisappearing)
-            {
-                if (progressBar != null)
-                    progressBar.gameObject.SetActive(false);
-
-                if (barBackground != null)
-                    barBackground.SetActive(false);
-            }
+            if (sr != null) sr.color = originalColor;
+            CancelCollection();
         }
     }
 }

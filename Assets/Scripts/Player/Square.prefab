@@ -102,6 +102,7 @@ MonoBehaviour:
   delayBeforeDisappear: 2
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   hitboxSize: {x: 1.5, y: 1.5}
+  scoreValue: 1
   progressBar: {fileID: 2483722817683995934}
   barBackground: {fileID: 6119397504322658739}
 --- !u!61 &5720882627750966845
