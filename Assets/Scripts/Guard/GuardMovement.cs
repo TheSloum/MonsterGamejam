@@ -10,6 +10,7 @@ public class GuardMovement : MonoBehaviour
     public float turnSpeed = 360f; // degrees per second for fast turns
     public float sweepTurnSpeed = 60f; // degrees per second for slow scanning
     public float waitAtPeak = 1f; // how long to pause at sweep extremes
+     private GameObject player;
 
     private int currentNodeIndex = 0;
     private bool forward = true;
@@ -135,6 +136,33 @@ public class GuardMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, speed * Time.deltaTime);
             yield return null;
+        }
+    }
+
+void Update()
+        {
+            if (GameScore.Instance.lost)
+            {
+                StopAllCoroutines();
+                FacePlayer();
+
+            }
+        }
+        
+
+
+        private void FacePlayer()
+    {
+        player = GameObject.Find("Player");
+        Vector3 dir = player.transform.position - transform.position;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+        float currentAngle = transform.eulerAngles.z;
+        float angleDiff = Mathf.DeltaAngle(currentAngle, targetAngle);
+
+        if (Mathf.Abs(angleDiff) > 0.5f)
+        {
+            float step = Mathf.Sign(angleDiff) * turnSpeed * Time.deltaTime;
+            transform.Rotate(Vector3.forward, step);
         }
     }
 }

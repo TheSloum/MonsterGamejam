@@ -20,17 +20,23 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        float rotationInput = Input.GetAxis("Horizontal");
-        float moveInput = Input.GetAxis("Vertical");
+        if (!GameScore.Instance.lost) {
+            float rotationInput = Input.GetAxis("Horizontal");
+            float moveInput = Input.GetAxis("Vertical");
 
-        transform.Rotate(Vector3.forward * -rotationInput * rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.forward * -rotationInput * rotationSpeed * Time.deltaTime);
 
-        Vector2 force = transform.up * moveInput * moveSpeed;
-        rb.AddForce(force, ForceMode2D.Force);
+            Vector2 force = transform.up * moveInput * moveSpeed;
+            rb.AddForce(force, ForceMode2D.Force);
 
-        if (rb.velocity.magnitude > maxSpeed)
+            if (rb.velocity.magnitude > maxSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * maxSpeed;
+            }
+        } else
         {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            rb.velocity = Vector2.zero;  
+rb.angularVelocity = 0f; 
         }
     }
 

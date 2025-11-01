@@ -17,12 +17,10 @@ public class StartLevel : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             levelGen.LevelStart();
+            
         }
 
         // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
     }
 }
