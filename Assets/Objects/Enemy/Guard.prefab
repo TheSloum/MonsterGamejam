@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1216030180057978599}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 64, y: 64, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1216030180519779926}
@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  moveSpeed: 7.2
+  moveSpeed: 72
   turnSpeed: 270
   sweepTurnSpeed: 80
   waitAtPeak: 1
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coneAngle: 55
   rayCount: 15
-  rayDistance: 273.6
+  rayDistance: 6000
   detectionMask:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -98,8 +98,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216030180519779921}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.75339746}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1216030181548446363}
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 55
   m_PointLightOuterAngle: 60.86958
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 134.64
+  m_PointLightOuterRadius: 6000
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

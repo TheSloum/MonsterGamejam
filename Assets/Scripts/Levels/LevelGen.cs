@@ -18,9 +18,14 @@ public class LevelGen : MonoBehaviour
 public GameObject player; 
     private GameObject currentInstance;
     private int currentIndex = 0;
+    public GameObject reset;
 
     void Start()
 
+    {
+    
+    }
+    public void LevelStart()
     {
         GameScore gameScore = dayscore.GetComponent<GameScore>();
         if(gameScore.day == 1)
@@ -45,6 +50,10 @@ public GameObject player;
 
         if (currentIndex >= selectedPrefabs.Count)
         {
+            GameScore gameScore = dayscore.GetComponent<GameScore>();
+
+            gameScore.day = gameScore.day + 1;
+            player.transform.SetPositionAndRotation(reset.transform.position, reset.transform.rotation);
             return;
         }
 
