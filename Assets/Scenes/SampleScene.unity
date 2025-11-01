@@ -358,6 +358,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 768260985541489598, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15
+      objectReference: {fileID: 0}
     - target: {fileID: 2961466589578005706, guid: 20e124d82ad5bde469011c92bce44ab6, type: 3}
       propertyPath: m_Intensity
       value: 0.4
@@ -1939,6 +1943,7 @@ Transform:
   m_Children:
   - {fileID: 1225922153}
   - {fileID: 1138432138}
+  - {fileID: 1259468909}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5993,6 +5998,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1259468908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1259468909}
+  m_Layer: 0
+  m_Name: CimetierreSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1259468909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259468908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.8, y: -100.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 221613091}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1266530198
 GameObject:
   m_ObjectHideFlags: 0
@@ -7926,7 +7962,7 @@ MonoBehaviour:
   numberToSelect: 3
   dayscore: {fileID: 1768263724}
   player: {fileID: 53163705}
-  reset: {fileID: 221613090}
+  reset: {fileID: 1259468908}
 --- !u!4 &1813077129
 Transform:
   m_ObjectHideFlags: 0

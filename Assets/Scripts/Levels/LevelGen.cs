@@ -27,6 +27,7 @@ public GameObject player;
     }
     public void LevelStart()
     {
+        currentIndex = 0;
         GameScore gameScore = dayscore.GetComponent<GameScore>();
         if(gameScore.day == 1)
         {
