@@ -3,9 +3,11 @@ using UnityEngine.UI;
 
 public class LoseButton : MonoBehaviour
 {
+    
+public GameObject gameOver; 
     void Start()
     {
-        // On récupère le composant Button du prefab
+        // On rï¿½cupï¿½re le composant Button du prefab
         Button btn = GetComponent<Button>();
 
         if (btn != null)
@@ -14,13 +16,11 @@ public class LoseButton : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Aucun composant Button trouvé sur " + gameObject.name);
+            Debug.LogWarning("Aucun composant Button trouvï¿½ sur " + gameObject.name);
         }
     }
 
     void OnLoseButtonClicked()
     {
-        Debug.Log("Bouton cliqué ! Le joueur a perdu !");
-        GameScore.Instance.lost = true;
     }
 }

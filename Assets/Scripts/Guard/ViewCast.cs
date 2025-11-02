@@ -13,12 +13,11 @@ public class ViewCast : MonoBehaviour
     public LayerMask detectionMask;
 
     [Header("Prefab à afficher (Sprite animé)")]
-    public GameObject objectToShow;
+    
 
     private float timer = 0f;
     private bool coold = true;
     private bool playerDetected = false;
-
     void Update()
     {
         if (coold)
@@ -53,26 +52,10 @@ public class ViewCast : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 playerDetected = true;
+                GameScore.Instance.lost = true;
             }
         }
 
-        if (objectToShow != null && playerDetected)
-        {
-            if (!GameObject.Find(objectToShow.name + "(Clone)"))
-            {
-                GameObject container = GameObject.Find("InGame");
-
-
-                if (container != null)
-                {
-                    GameObject instance = Instantiate(objectToShow, container.transform);
-                    Debug.Log("Sprite animé instancié dans 'InGame' !");
-                }
-                else
-                {
-                    Debug.LogWarning("Conteneur 'InGame' introuvable dans la scène !");
-                }
-            }
-        }
+        
     }
 }

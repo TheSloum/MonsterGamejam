@@ -23,6 +23,11 @@ public class GameOver : MonoBehaviour
     public AudioSource sniper; 
     public GameObject reset;
 public GameObject player; 
+
+
+public GameObject objectToShow;
+
+    
     void Update()
     {
         if (!triggered && GameScore.Instance != null && GameScore.Instance.lost)
@@ -50,8 +55,13 @@ public GameObject player;
             SpawnBloodMist();
         }
 
+
+objectToShow.SetActive(true);
         // Wait 1 second before resetting the scene
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(3.5f);
+
+        
+objectToShow.SetActive(false);
 
         GameScore.Instance.lost = false;
         if(GameScore.Instance.day == 3){
@@ -62,6 +72,24 @@ public GameObject player;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else { 
+            if (objectToShow != null && GameScore.Instance.lost)
+        {
+            if (!GameObject.Find(objectToShow.name + "(Clone)"))
+            {
+                GameObject container = GameObject.Find("InGame");
+
+
+                if (container != null)
+                {
+                    GameObject instance = Instantiate(objectToShow, container.transform);
+                    Debug.Log("Sprite animé instancié dans 'InGame' !");
+                }
+                else
+                {
+                    Debug.LogWarning("Conteneur 'InGame' introuvable dans la scène !");
+                }
+            }
+        }
             triggered = false;
             GameScore.Instance.day += 1;
             player.transform.SetPositionAndRotation(reset.transform.position, reset.transform.rotation);      

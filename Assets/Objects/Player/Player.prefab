@@ -495,6 +495,9 @@ MonoBehaviour:
   bloodFadeDuration: 0.8
   surpriseS: {fileID: 4446953641665206029}
   sniper: {fileID: 3922335967513089353}
+  reset: {fileID: 0}
+  player: {fileID: 0}
+  objectToShow: {fileID: 0}
 --- !u!58 &768260985124337047
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -545,7 +548,7 @@ MonoBehaviour:
   - {x: -12.989312, y: -16.102224, z: 0}
   m_ShapePathHash: -215692159
   m_Mesh: {fileID: 0}
-  m_InstanceId: 116414
+  m_InstanceId: 135922
 --- !u!1 &768260985541489474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,7 +2560,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 8a1fefac68a029e4fbfcff227338f1de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
