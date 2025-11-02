@@ -20,8 +20,7 @@ public class tuto : MonoBehaviour
         // Attend 2 secondes
         yield return new WaitForSeconds(2f);
 
-        // Action après le délai
-        Debug.Log("2 secondes se sont écoulées !");
+
 
             textToDisppearMoove.SetActive(false);
             if(amiPeutApparaitre == true){

@@ -768,9 +768,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1bf2dfdc2d84e41a5f34d56ee62aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuInterface: {fileID: 0}
+  Score: {fileID: 0}
+  credit: {fileID: 0}
   player: {fileID: 0}
-  startButtonSprite: {fileID: 1825065131087915742}
-  quitButtonSprite: {fileID: 5176386676255909433}
 --- !u!223 &8540427215952369311
 Canvas:
   m_ObjectHideFlags: 0
