@@ -16,6 +16,7 @@ public class GuardMovement : MonoBehaviour
     private bool forward = true;
     private bool isSweeping = false;
 
+    public bool loop = false;
     private void Start()
     {
         if (guardNodes == null || guardNodes.Count == 0)
@@ -53,12 +54,12 @@ public class GuardMovement : MonoBehaviour
                 currentNodeIndex--;
 
             // Reverse direction if reached ends
-            if (currentNodeIndex >= guardNodes.Count)
+            if (currentNodeIndex >= guardNodes.Count && loop != true)
             {
                 currentNodeIndex = guardNodes.Count - 2;
                 forward = false;
             }
-            else if (currentNodeIndex < 0)
+            else if (currentNodeIndex < 0 || (loop == true && currentNodeIndex >= guardNodes.Count))
             {
                 currentNodeIndex = 1;
                 forward = true;
