@@ -21,6 +21,8 @@ public class GameOver : MonoBehaviour
 
     public AudioSource surpriseS; 
     public AudioSource sniper; 
+    public GameObject reset;
+public GameObject player; 
     void Update()
     {
         if (!triggered && GameScore.Instance != null && GameScore.Instance.lost)
@@ -52,12 +54,24 @@ public class GameOver : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
 
         GameScore.Instance.lost = false;
+        if(GameScore.Instance.day == 3){
         GameScore.Instance.score = 0;
         
         GameScore.Instance.day = 1;
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else { 
+            triggered = false;
+            GameScore.Instance.day += 1;
+            player.transform.SetPositionAndRotation(reset.transform.position, reset.transform.rotation);      
+        bullet.SetActive(true);
+        Vector3 angles = rotateObject.localEulerAngles;
+    angles.z = -90f;
+    rotateObject.localEulerAngles = angles;
+        }
     }
+
 
     private IEnumerator RotateObject90(Transform obj, float speed)
 {
