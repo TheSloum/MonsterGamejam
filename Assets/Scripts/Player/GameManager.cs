@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int amount)
     {
+        GameScore.Instance.score += amount;
         score += amount;
         Debug.Log("[GameManager] AddScore: +" + amount + " => total = " + score);
         UpdateScoreText();

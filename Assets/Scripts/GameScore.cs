@@ -8,6 +8,7 @@ public class GameScore : MonoBehaviour
     public int day = 1;
 
     public bool lost = false;
+    public int skin = 0;
     
     public static GameScore Instance { get; private set; }
 
