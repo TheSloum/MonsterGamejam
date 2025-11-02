@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-
 using UnityEngine;
 
 public class DisappearOnInteract2D : MonoBehaviour
@@ -14,8 +13,12 @@ public class DisappearOnInteract2D : MonoBehaviour
     public GameObject barBackground;
 
     [Header("Apparence")]
-    public Sprite[] staticSprites; // 6 sprites cadavre_1 à cadavre_6
-    public Animator animator;      // Animator pour le cadavre_0 animé
+    public Sprite[] staticSprites;
+    public Animator animator;
+
+    [Header("Audio")]
+    public AudioClip pickupClip;
+    [Range(0f, 1f)] public float pickupVolume = 1f;
 
     private SpriteRenderer sr;
     private Color originalColor;
@@ -23,6 +26,7 @@ public class DisappearOnInteract2D : MonoBehaviour
     private bool playerIsNear = false;
     private bool isDisappearing = false;
     private PlayerMovement playerMovement;
+    private AudioSource currentPickupAudio; // 🎧 le son actif pendant le ramassage
 
     void Start()
     {
@@ -47,13 +51,9 @@ public class DisappearOnInteract2D : MonoBehaviour
         if (barBackground != null)
             barBackground.SetActive(false);
 
-        // Player ref
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
-
-
-        int index = Random.Range(0, 7); // 0–6 inclus
-
+        int index = Random.Range(0, 7);
         if (index == 0)
         {
             if (animator != null)
@@ -65,10 +65,6 @@ public class DisappearOnInteract2D : MonoBehaviour
             if (animator != null)
                 animator.enabled = false;
         }
-
-
-
-
     }
 
     void Update()
@@ -81,13 +77,13 @@ public class DisappearOnInteract2D : MonoBehaviour
             }
             else
             {
+                StopPickupSound();
                 ResetProgressBar();
             }
         }
-
-        if (isDisappearing && !Input.GetKey(KeyCode.Space))
+        else if (!Input.GetKey(KeyCode.Space))
         {
-            ResetProgressBar();
+            StopPickupSound();
         }
     }
 
@@ -105,10 +101,14 @@ public class DisappearOnInteract2D : MonoBehaviour
             progressBar.localScale = new Vector3(0f, initialScale.y, initialScale.z);
         }
 
+        // 🔊 Démarre le son de ramassage pendant la progression
+        PlayPickupSound();
+
         while (elapsed < delayBeforeDisappear)
         {
             if (playerMovement.IsMoving() || !Input.GetKey(KeyCode.Space))
             {
+                StopPickupSound();
                 ResetProgressBar();
                 yield break;
             }
@@ -122,18 +122,49 @@ public class DisappearOnInteract2D : MonoBehaviour
             yield return null;
         }
 
+        StopPickupSound();
+
         GameManager.Instance.AddScore(1);
         Destroy(gameObject);
+    }
+
+    private void PlayPickupSound()
+    {
+        if (pickupClip == null) return;
+
+        // Si un son est déjà en train de jouer, ne pas le redémarrer
+        if (currentPickupAudio != null && currentPickupAudio.isPlaying) return;
+
+        GameObject tempAudio = new GameObject("PickupSound");
+        tempAudio.transform.position = Camera.main.transform.position;
+
+        currentPickupAudio = tempAudio.AddComponent<AudioSource>();
+        currentPickupAudio.clip = pickupClip;
+        currentPickupAudio.volume = pickupVolume;
+        currentPickupAudio.loop = true; // 🔁 boucle pendant la progression
+        currentPickupAudio.spatialBlend = 0f;
+        currentPickupAudio.Play();
+    }
+
+    private void StopPickupSound()
+    {
+        if (currentPickupAudio != null)
+        {
+            currentPickupAudio.Stop();
+            Destroy(currentPickupAudio.gameObject);
+            currentPickupAudio = null;
+        }
     }
 
     private void ResetProgressBar()
     {
         isDisappearing = false;
-        if (progressBar != null)
-            progressBar.localScale = new Vector3(0f, initialScale.y, initialScale.z);
 
         if (progressBar != null)
+        {
+            progressBar.localScale = new Vector3(0f, initialScale.y, initialScale.z);
             progressBar.gameObject.SetActive(false);
+        }
 
         if (barBackground != null)
             barBackground.SetActive(false);
@@ -145,9 +176,8 @@ public class DisappearOnInteract2D : MonoBehaviour
         {
             playerIsNear = true;
             if (sr != null)
-            sr.color = highlightColor;
+                sr.color = highlightColor;
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -158,6 +188,7 @@ public class DisappearOnInteract2D : MonoBehaviour
             if (sr != null)
                 sr.color = originalColor;
 
+            StopPickupSound();
             ResetProgressBar();
         }
     }
