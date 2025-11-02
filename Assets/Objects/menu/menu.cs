@@ -5,6 +5,7 @@ public class menu : MonoBehaviour
     public GameObject menuInterface;
     public GameObject Score;
     public GameObject credit;
+    public GameObject intro;
     public Transform player;
     
     void Awake()
@@ -26,7 +27,15 @@ public class menu : MonoBehaviour
         menuInterface.SetActive(false);
         Score.SetActive(true);
         
-        Debug.Log("start");
+        
+    }
+
+    public void StartCine()
+    {
+        
+        menuInterface.SetActive(false);
+        intro.SetActive(true);
+        
         
     }
 
@@ -39,7 +48,6 @@ public class menu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("⛔ Quit cliqué !");
         Application.Quit();
     }
 
