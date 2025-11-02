@@ -20,6 +20,12 @@ public class tokinoto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Space)){
+            Vector3 spawnPosition = new Vector3(-10427f,-54f,0f);
+            player.position = spawnPosition;     
+            score.SetActive(true);
+            cine.SetActive(false);
+        }
       
         if(transform.position.x >= 80f){
              transform.Translate(Vector3.left* speed * Time.deltaTime);
