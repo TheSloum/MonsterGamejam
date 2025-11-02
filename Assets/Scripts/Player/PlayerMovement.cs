@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float rotationSpeed = 180f;
-    public float moveSpeed = 5f;
-    public float maxSpeed = 5f;
+    public float rotationSpeed = 160f;
+    public float moveSpeed = 1f;
+    public float maxSpeed = 1f;
     public AudioSource walkSound; 
 
     private Rigidbody2D rb;
