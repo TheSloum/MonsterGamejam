@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 768260985124337046}
   - component: {fileID: 8040000721065177763}
   - component: {fileID: 768260985124337047}
+  - component: {fileID: 4570788163376551324}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -510,6 +511,41 @@ CircleCollider2D:
   m_Offset: {x: 0.49477196, y: -5.7213554}
   serializedVersion: 2
   m_Radius: 18.941751
+--- !u!114 &4570788163376551324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768260985124337051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -31.913067, y: -13.72191, z: 0}
+  - {x: -31.632526, y: -0.94705105, z: 0}
+  - {x: -13.129583, y: 1.7122891, z: 0}
+  - {x: -8.640887, y: 6.200986, z: 0}
+  - {x: 9.173625, y: 6.200986, z: 0}
+  - {x: 12.960962, y: 2.1331046, z: 0}
+  - {x: 32.62207, y: -1.2275963, z: 0}
+  - {x: 31.92071, y: -12.880278, z: 0}
+  - {x: 13.52205, y: -15.4008665, z: 0}
+  - {x: 10.155528, y: -18.066029, z: 0}
+  - {x: -9.201975, y: -18.627115, z: 0}
+  - {x: -12.989312, y: -16.102224, z: 0}
+  m_ShapePathHash: -215692159
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -869370
 --- !u!1 &768260985541489474
 GameObject:
   m_ObjectHideFlags: 0
