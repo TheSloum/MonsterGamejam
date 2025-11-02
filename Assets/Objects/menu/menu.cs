@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class menu : MonoBehaviour
 {
-    public PlayerMovement player;
-    public SpriteRenderer startButtonSprite;
-    public SpriteRenderer quitButtonSprite;
-
+    public GameObject menuInterface;
+    public GameObject Score;
+    public GameObject credit;
+    public Transform player;
+    
     void Awake()
     {
 
@@ -14,28 +15,25 @@ public class menu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // clic gauche
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-            if (hit.collider != null)
-            {
-                if (hit.collider.gameObject == startButtonSprite.gameObject)
-                {
-                    StartGame();
-                }
-                else if (hit.collider.gameObject == quitButtonSprite.gameObject)
-                {
-                    QuitGame();
-                }
-            }
-        }
+        
     }
 
     public void StartGame()
     {
-        Debug.Log("⛔ Quit cliqué !");
+        
+        Vector3 spawnPosition = new Vector3(-10427f,-54f,0f);
+        player.position = spawnPosition;
+        menuInterface.SetActive(false);
+        Score.SetActive(true);
+        
+        Debug.Log("start");
+        
+    }
+
+    public void CreditStart()
+    {
+        credit.SetActive(true);
+        menuInterface.SetActive(false);
         
     }
 
@@ -43,5 +41,12 @@ public class menu : MonoBehaviour
     {
         Debug.Log("⛔ Quit cliqué !");
         Application.Quit();
+    }
+
+    public void StartMenu()
+    {
+        credit.SetActive(false);
+        menuInterface.SetActive(true);
+        
     }
 }
