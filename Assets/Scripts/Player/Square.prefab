@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2497aa252c2d60f478ef87e2667711d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBeforeDisappear: 2
+  delayBeforeDisappear: 0.65
   highlightColor: {r: 0.7169812, g: 0.17180489, b: 0.17180489, a: 1}
   hitboxSize: {x: 1.5, y: 1.5}
   progressBar: {fileID: 2483722817683995934}

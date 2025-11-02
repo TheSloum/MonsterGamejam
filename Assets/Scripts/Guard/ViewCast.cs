@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class ViewCast : MonoBehaviour
 {
+    [Header("Vision Settings")]
     public float coneAngle = 55f;
     public int rayCount = 10;
     public float rayDistance = 5f;
 
     [Header("Detection Settings")]
     public LayerMask detectionMask;
-    [Header("UI Prefab à afficher")]
-    public GameObject objectToShow; // Le prefab d'UI à afficher (non présent dans la scène)
+
+    [Header("Prefab à afficher (Sprite animé)")]
+    
 
     private float timer = 0f;
     private bool coold = true;
     private bool playerDetected = false;
-
     void Update()
     {
         if (coold)
@@ -52,29 +53,9 @@ public class ViewCast : MonoBehaviour
             {
                 playerDetected = true;
                 GameScore.Instance.lost = true;
-                Debug.Log("Player détecté !");
             }
         }
 
-        if (objectToShow != null && playerDetected)
-        {
-            // Vérifie s’il existe déjà dans la scène
-            if (!GameObject.Find(objectToShow.name + "(Clone)"))
-            {
-                // Trouve le Canvas (celui de la Main Camera)
-                Canvas canvas = FindObjectOfType<Canvas>();
-                if (canvas != null)
-                {
-                    // Instancie le prefab comme enfant du Canvas
-                    GameObject uiInstance = Instantiate(objectToShow, canvas.transform);
-                    uiInstance.transform.localPosition = Vector3.zero; // Centre sur l’écran
-                    Debug.Log("UI instancié dans le Canvas de la caméra !");
-                }
-                else
-                {
-                    Debug.LogWarning("Aucun Canvas trouvé dans la scène !");
-                }
-            }
-        }
+        
     }
 }

@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
-
         if (!canMove) {return;}
 
         
@@ -47,7 +45,11 @@ public class PlayerMovement : MonoBehaviour
         // Animation basée uniquement sur l'input
         if (childAnimator != null)
         {
+            
+        childAnimator.SetInteger("Skin", GameScore.Instance.skin);
+
             bool isWalking = Mathf.Abs(moveInput) > 0.01f || Mathf.Abs(rotationInput) > 0.01f;
+
             childAnimator.SetBool("isWalking", isWalking);
             if(!isWalking){
                 walkSound.Play();       
@@ -63,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Exit")
+        if (collision.gameObject.name == "Exit" && GameScore.Instance.lost == false)
         {
             levelGen.NextRoom();
             
