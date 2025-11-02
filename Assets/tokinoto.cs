@@ -20,12 +20,11 @@ public class tokinoto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if(transform.position.x >= 125f){
+      
+        if(transform.position.x >= 80f){
              transform.Translate(Vector3.left* speed * Time.deltaTime);
             
         }else{
-            Debug.Log("lancer la fin");
             Vector3 spawnPosition = new Vector3(-10427f,-54f,0f);
             player.position = spawnPosition;     
             score.SetActive(true);
