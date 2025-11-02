@@ -12,31 +12,44 @@ public class PlayerMovement : MonoBehaviour
 
     public LevelGen levelGen;
 
-    [HideInInspector] public bool canMove = true; // Bloque le mouvement pendant la collecte
-    public float movementThreshold = 0.1f; // Vitesse minimale considérée comme "bougé"
+    [HideInInspector] public bool canMove = true;
+    public float movementThreshold = 0.1f;
+
+    public Animator childAnimator;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (childAnimator == null)
+            Debug.LogWarning("Animator enfant non assignÃ© !");
     }
 
     void Update()
     {
-        if (!canMove) return; // Bloquer tout mouvement
+        if (!canMove) return;
 
         float rotationInput = Input.GetAxis("Horizontal");
         float moveInput = Input.GetAxis("Vertical");
 
         transform.Rotate(Vector3.forward * -rotationInput * rotationSpeed * Time.deltaTime);
-
-        Vector2 force = transform.up * moveInput * moveSpeed;
-        rb.AddForce(force, ForceMode2D.Force);
+        rb.AddForce(transform.up * moveInput * moveSpeed);
 
         if (rb.velocity.magnitude > maxSpeed)
-        {
             rb.velocity = rb.velocity.normalized * maxSpeed;
+
+        // Animation basÃ©e uniquement sur l'input
+        if (childAnimator != null)
+        {
+            bool isWalking = Mathf.Abs(moveInput) > 0.01f || Mathf.Abs(rotationInput) > 0.01f;
+            childAnimator.SetBool("isWalking", isWalking);
+
+            Debug.Log(isWalking ? "Walking" : "Idle");
         }
     }
+
+
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
