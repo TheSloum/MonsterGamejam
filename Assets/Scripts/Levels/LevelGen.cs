@@ -20,6 +20,10 @@ public GameObject player;
     private int currentIndex = 0;
     public GameObject reset;
 
+
+    public AudioSource musiquePlay;
+    public AudioSource musiqueStop;
+
     void Start()
 
     {
@@ -27,6 +31,8 @@ public GameObject player;
     }
     public void LevelStart()
     {
+        musiquePlay.Play();
+        musiqueStop.Stop();
         currentIndex = 0;
         GameScore gameScore = dayscore.GetComponent<GameScore>();
         if(gameScore.day == 1)
