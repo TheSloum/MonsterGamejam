@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     public LevelGen levelGen;
 
-    [HideInInspector] public bool canMove = true;
+   public bool canMove;
     public float movementThreshold = 0.1f;
 
     public Animator childAnimator;
@@ -27,7 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!canMove) return;
+        
+
+        if (!canMove) {return;}
 
         
 

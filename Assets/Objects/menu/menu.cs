@@ -6,10 +6,10 @@ public class menu : MonoBehaviour
     public SpriteRenderer startButtonSprite;
     public SpriteRenderer quitButtonSprite;
 
-    void Start()
+    void Awake()
     {
-        if (player != null)
-            player.canMove = false;
+
+        
     }
 
     void Update()
@@ -33,15 +33,13 @@ public class menu : MonoBehaviour
         }
     }
 
-    void StartGame()
+    public void StartGame()
     {
-        Debug.Log("▶️ Start cliqué !");
-        if (player != null)
-            player.canMove = true;
-        gameObject.SetActive(false);
+        Debug.Log("⛔ Quit cliqué !");
+        
     }
 
-    void QuitGame()
+    public void QuitGame()
     {
         Debug.Log("⛔ Quit cliqué !");
         Application.Quit();
