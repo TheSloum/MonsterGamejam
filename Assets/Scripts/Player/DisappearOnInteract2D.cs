@@ -6,7 +6,7 @@ public class DisappearOnInteract2D : MonoBehaviour
     [Header("Paramètres du carré")]
     public float delayBeforeDisappear = 2f;
     public Color highlightColor = Color.yellow;
-    public Vector2 hitboxSize = new Vector2(1.5f, 1.5f);
+    public Vector2 hitboxSize;
 
     [Header("Barre de progression")]
     public Transform progressBar;
