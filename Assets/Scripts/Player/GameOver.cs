@@ -19,11 +19,14 @@ public class GameOver : MonoBehaviour
 
     private bool triggered = false;
 
+    public AudioSource surpriseS; 
+    public AudioSource sniper; 
     void Update()
     {
         if (!triggered && GameScore.Instance != null && GameScore.Instance.lost)
         {
             surprise.SetActive(true);
+                surpriseS.Play();  
             triggered = true;
             StartCoroutine(HandleLostSequence());
         }
@@ -31,11 +34,13 @@ public class GameOver : MonoBehaviour
 
     private IEnumerator HandleLostSequence()
     {
+                sniper.Play();   
         // Step 1: Rotate rotateObject 90 degrees smoothly
         yield return StartCoroutine(RotateObject90(rotateObject, rotationSpeed));
 
         // Step 2: Move moveObject -3300 units on its local X
-        yield return StartCoroutine(MoveObjectLocalX(moveObject, -3300f, moveSpeed));
+        
+        yield return StartCoroutine(MoveObjectLocalX(moveObject, -1500f, moveSpeed));
 
         // Step 3: Spawn blood mist particles
         for (int i = 0; i < bloodMistCount; i++)
@@ -44,7 +49,7 @@ public class GameOver : MonoBehaviour
         }
 
         // Wait 1 second before resetting the scene
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.2f);
 
         GameScore.Instance.lost = false;
         GameScore.Instance.score = 0;
@@ -55,21 +60,25 @@ public class GameOver : MonoBehaviour
     }
 
     private IEnumerator RotateObject90(Transform obj, float speed)
+{
+    float targetAngle = obj.localEulerAngles.z + 90f;
+    float remaining = 90f;
+
+    while (remaining > 0f)
     {
-        float targetAngle = obj.eulerAngles.z + 90f;
-        float remaining = 90f;
-
-        while (remaining > 0f)
-        {
-            float step = speed * Time.deltaTime;
-            if (step > remaining) step = remaining;
-            obj.Rotate(0, 0, step);
-            remaining -= step;
-            yield return null;
-        }
-
-        obj.eulerAngles = new Vector3(obj.eulerAngles.x, obj.eulerAngles.y, targetAngle);
+        float step = speed * Time.deltaTime;
+        if (step > remaining) step = remaining;
+        obj.Rotate(0, 0, step, Space.Self); // explicitly rotate in local space
+        remaining -= step;
+        yield return null;
     }
+
+    // Snap exactly to final local rotation
+    Vector3 angles = obj.localEulerAngles;
+    angles.z = targetAngle;
+    obj.localEulerAngles = angles;
+}
+
 
     private IEnumerator MoveObjectLocalX(Transform obj, float distance, float speed)
     {
@@ -93,7 +102,7 @@ public class GameOver : MonoBehaviour
 
         GameObject mist = Instantiate(bloodMistPrefab, transform.position, Quaternion.identity, transform);
 
-        Vector3 direction = Vector3.left + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f), 0);
+        Vector3 direction = Vector3.left + new Vector3(Random.Range(-20f, 20f), Random.Range(-20f, 20f), 0);
         StartCoroutine(MoveAndFadeMist(mist.transform, direction.normalized));
     }
 
