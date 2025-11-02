@@ -22,7 +22,9 @@ public class GameOver : MonoBehaviour
     public AudioSource surpriseS; 
     public AudioSource sniper; 
     public GameObject reset;
-public GameObject player; 
+    public AudioSource showSound;
+
+    public GameObject player; 
 
 
 public GameObject objectToShow;
@@ -57,7 +59,12 @@ public GameObject objectToShow;
 
 
 objectToShow.SetActive(true);
-        // Wait 1 second before resetting the scene
+        objectToShow.SetActive(true);
+        if (showSound != null)
+        {
+            showSound.Play();
+        }
+
         yield return new WaitForSeconds(3.5f);
 
         
